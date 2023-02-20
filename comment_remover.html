@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Remove SQL Comments</title>
+    <script type="text/javascript">
+      function removeComments() {
+        // Get the SQL script from the textarea
+        var sqlScript = document.getElementById("sql-script").value;
+
+        // Remove comments from the SQL script using a regular expression
+        sqlScript = sqlScript.replace(/--.*$/mg, ""); // Remove single-line comments
+        sqlScript = sqlScript.replace(/\/\*[\s\S]*?\*\//g, ""); // Remove multi-line comments
+
+        // Set the updated SQL script back into the textarea
+        document.getElementById("sql-script").value = sqlScript;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Remove SQL Comments</h1>
+    <textarea id="sql-script" rows="10" cols="50"></textarea><br><br>
+    <button onclick="removeComments()">Remove Comments</button>
+  </body>
+</html>
