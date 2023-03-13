@@ -1,4 +1,5 @@
 // Get references to HTML elements
+console.log('Script loaded!');
 const csvDataTextarea = document.getElementById('csv-data');
 const parseBtn = document.getElementById('parse-btn');
 const outputList = document.getElementById('output-list');
