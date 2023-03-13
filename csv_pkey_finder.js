@@ -6,6 +6,7 @@ const outputList = document.getElementById('output-list');
 
 // Add event listener to parse button
 parseBtn.addEventListener('click', () => {
+  console.log('Parse button is hit.');
   // Parse the CSV data using Papa Parse library
   const parsedData = Papa.parse(csvDataTextarea.value.trim(), { header: true });
 
