@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>CSV PKEY Finder</title>
-    </head>
-    <body>
-      <h1>CSV Unique row finder</h1>
-      <p>
-          The purpose of this script is to take a CSV with headers of some kind and find something that could be used as a primary key given the dataset.
-      </p>
-      <textarea id="csv-data" rows="20" cols="100"></textarea>
-      <button id="parse-btn" title="Click here to hunt for the alt key">Parse</button>
-      <ul id="output-list"></ul>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-      <script src="csv_pkey_finder.js"></script>
-    </body>
+<head>
+    <title>CSV Primary Key Finder</title>
+</head>
+<body>
+    <h1>CSV Primary Key Finder</h1>
+    <textarea rows="20" cols="100" id="csv-input"></textarea><br>
+    <button onclick="findPrimaryKeys()">Find Primary Keys</button>
+    <h2>Possible Primary Keys</h2>
+    <p id="output"></p>
+    
+    <script>
+        function findPrimaryKeys() {
+            // Get the CSV input from the textarea
+            var csv = document.getElementById("csv-input").value;
+            
+            // Split the CSV into lines
+            var lines = csv.split("\n");
+            
+            // Split the first line (header) into columns
+            var header = lines[0].split(",");
+            
+            // Check which combinations of columns are unique
+            var uniqueColumns = [];
+            for (var numColumns = 1; numColumns <= header.length; numColumns++) {
+                for (var i = 0; i <= header.length - numColumns; i++) {
+                    var columns = header.slice(i, i + numColumns);
+                    var unique = true;
+                    for (var k = 1; k < lines.length; k++) {
+                        var values = lines[k].split(",");
+                        var key = columns.map((col) => values[header.indexOf(col)]).join("|");
+                        if (uniqueColumns.includes(key)) {
+                            unique = false;
+                            break;
+                        } else {
+                            uniqueColumns.push(key);
+                        }
+                    }
+                    if (unique) {
+                        document.getElementById("output").innerHTML += "Primary key: " + columns.join(", ") + "<br>";
+                    }
+                }
+            }
+            
+            // If no primary key is found, display an error message
+            if (document.getElementById("output").innerHTML === "") {
+                document.getElementById("output").innerHTML = "Error: no primary key found";
+            }
+        }
+    </script>
+</body>
 </html>
