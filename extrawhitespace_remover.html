@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whitespace Remover</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    textarea {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    input[type=button] {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Whitespace Remover</h1>
+  <form>
+    <label for="inputText">Input text:</label><br>
+    <textarea id="inputText" name="inputText" rows="10" cols="50">
+    </textarea><br>
+    <input type="button" value="Remove Extra Whitespace" onclick="removeExtraWhitespace()">
+    <input type="button" value="Copy to Clipboard" onclick="copyToClipboard()">
+  </form>
+
+  <label for="outputText">Output text:</label><br>
+  <textarea id="outputText" name="outputText" rows="10" cols="50" readonly>
+  </textarea>
+
+  <script>
+    function removeExtraWhitespace() {
+      let inputText = document.getElementById('inputText').value;
+      // Replace 2 or more spaces with a single space, preserving new lines
+      let outputText = inputText.split('\n').map(line => line.replace(/ {2,}/g, ' ')).join('\n');
+      document.getElementById('outputText').value = outputText;
+    }
+
+    function copyToClipboard() {
+      /* Get the text field */
+      var copyText = document.getElementById("outputText");
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      /* Alert the copied text */
+      alert("Copied the text: " + copyText.value);
+    }
+  </script>
+</body>
+</html>
