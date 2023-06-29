@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #bdc3c7, #2c3e50);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .colorPickerContainer {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        label {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        #colorPicker {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #selectedColor {
+            margin-top: 20px;
+        }
+
+        #colorHexValue {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        #colorDisplay {
+            height: 50px;
+            width: 50px;
+            margin: 10px auto;
+            border-radius: 25px;
+        }
+
+        #copyButton {
+            padding: 10px 20px;
+            border: none;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #copyButton:hover {
+            background-color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="colorPickerContainer">
+        <label for="colorPicker">Select a color:</label>
+        <input type="color" id="colorPicker">
+        <div id="selectedColor">
+            <div id="colorDisplay"></div>
+            <p id="colorHexValue"></p>
+            <button id="copyButton">Copy</button>
+        </div>
+    </div>
+
+    <script>
+        const colorPicker = document.querySelector("#colorPicker");
+        const colorHexValue = document.querySelector("#colorHexValue");
+        const copyButton = document.querySelector("#copyButton");
+        const selectedColorDiv = document.querySelector("#selectedColor");
+        const colorDisplay = document.querySelector("#colorDisplay");
+
+        selectedColorDiv.style.display = "none"; // Hide at the start
+
+        colorPicker.addEventListener("input", function() {
+            colorHexValue.textContent = "Selected Hex Value: " + colorPicker.value;
+            colorDisplay.style.backgroundColor = colorPicker.value;
+            selectedColorDiv.style.display = "block"; // Show the selected color div
+        });
+
+        copyButton.addEventListener("click", function() {
+            const el = document.createElement('textarea');
+            el.value = colorPicker.value;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('Copied the color value: ' + colorPicker.value);
+        });
+    </script>
+</body>
+</html>
