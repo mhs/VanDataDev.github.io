@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grade Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input {
+      width: 100px;
+    }
+    
+    button {
+      display: block;
+      margin-top: 10px;
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Grade Calculator</h1>
+  
+  <div>
+    <label for="currentGrade">Current Grade (%):</label>
+    <input type="number" id="currentGrade" min="0" max="100" step="0.01">
+  </div>
+  
+  <div>
+    <label for="examWeight">Exam Weight (%):</label>
+    <input type="number" id="examWeight" min="0" max="100" step="0.01">
+  </div>
+  
+  <div>
+    <label for="finalExamScore">Final Exam Score (%):</label>
+    <input type="number" id="finalExamScore" min="0" max="100" step="0.01">
+  </div>
+  
+  <button onclick="calculateGrade()">Calculate</button>
+  
+  <div id="result"></div>
+
+  <script>
+    function calculateGrade() {
+      var currentGrade = parseFloat(document.getElementById("currentGrade").value);
+      var examWeight = parseFloat(document.getElementById("examWeight").value);
+      var finalExamScore = parseFloat(document.getElementById("finalExamScore").value);
+      
+      // Calculate the final grade
+      var finalGrade = (currentGrade * (100 - examWeight) / 100) + (finalExamScore * examWeight / 100);
+      
+      // Display the result
+      document.getElementById("result").textContent = "Final Grade: " + finalGrade.toFixed(2) + "%";
+    }
+  </script>
+</body>
+</html>
