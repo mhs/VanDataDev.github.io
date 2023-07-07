@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div>
+            <label for="originalText">Original Text</label>
+            <textarea id="originalText"></textarea>
+        </div>
+
+        <div>
+            <label for="changedText">Changed Text</label>
+            <textarea id="changedText"></textarea>
+        </div>
+
+        <button id="compareButton">Compare</button>
+
+        <div>
+            <label for="diffOutput">Diff Output</label>
+            <div id="diffOutput"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
